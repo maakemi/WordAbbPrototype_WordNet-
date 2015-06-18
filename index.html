@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: auto;
+  position: relative;
+  width: 960px;
+}
+
+form {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.node {
+  border: solid 1px white;
+  font: 10px sans-serif;
+  line-height: 12px;
+  overflow: hidden;
+  position: absolute;
+  text-indent: 2px;
+}
+
+#testArea {
+    font: 10px sans-serif;
+    background-color: red;
+    visibility: hidden;
+}
+    
+</style>
+
+<form>
+  <label><select >
+              <option value=0>Drop Vowels</option>
+              <option value=1>Truncation</option>              
+              <option value=2>Truncation Keep End</option>
+        </select> Word Abbreviation Technique <br> </label> 
+  <label><input type="radio" name="mode" value="size" checked> Size</label>
+  <label><input type="radio" name="mode" value="count"> Count</label>
+</form>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="/library/jquery-1.2.6.min.js"></script>
+<script>
+    
+    
+var MIN_WORD_LENGTH = 1;
+
+var margin = {top: 60, right: 10, bottom: 10, left: 10},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+var color = d3.scale.category20c();
+
+var treemap = d3.layout.treemap()
+    .size([width, height])
+    .sticky(true)
+    .value(function(d) { return d.size; });
+
+var div = d3.select("body").append("div")
+    .style("position", "relative")
+    .style("width", (width + margin.left + margin.right) + "px")
+    .style("height", (height + margin.top + margin.bottom) + "px")
+    .style("left", margin.left + "px")
+    .style("top", margin.top + "px");
+
+d3.json("flare.json", function(error, root) {
+  var node = div.datum(root).selectAll(".node")
+      .data(treemap.nodes)
+    .enter().append("div")
+      .attr("class", "node")
+      .call(position)
+      .style("background", function(d) { return d.children ? color(d.name) : null; })
+      .text(function(d) { return d.children ? null :wordAbbreviation($('select').val(), d.name, Math.max(0, d.dx - 1)); });
+
+  d3.selectAll("input").on("change", function change() {
+    var value = this.value === "count"
+        ? function() { return 1; }
+        : function(d) { return d.size; };
+
+    node
+        .data(treemap.value(value).nodes)
+        .transition()
+        .duration(1000)
+        .call(position)
+        .text(function(d) { return d.children ? null :wordAbbreviation($('select').val(), d.name, Math.max(0, d.dx - 1)); });
+  });
+    
+    d3.selectAll("select").on("change", function change() {  
+    console.log(this.value);    
+    var mode = $('input[name=mode]:checked').val() === "count"
+        ? function() { return 1; }
+        : function(d) { return d.size; };
+
+    node
+        .data(treemap.value(mode).nodes)
+        .transition()
+        .duration(1000)
+        .call(position)
+        .text(function(d) { return d.children ? null : wordAbbreviation($('select').val(), d.name, Math.max(0, d.dx - 1)); });
+  });
+});
+
+function position() {    
+  this.style("left", function(d) { return d.x + "px"; })
+      .style("top", function(d) { return d.y + "px"; })
+      .style("width", function(d) { return Math.max(0, d.dx - 1) + "px"; })
+      .style("height", function(d) { return Math.max(0, d.dy - 1) + "px"; });
+}
+    
+function dropVowels(word, wordSize, nodeWidth){          
+    var index = word.length, 
+        newWord, testWord;
+    while (wordSize>nodeWidth && index>MIN_WORD_LENGTH){
+        index--;
+        newWord = word.substring(index);
+        newWord = newWord.replace(/[aeiou]/g,"");
+        testWord = word.substring(0,index) + newWord;
+        wordSize = getWordSize(testWord);        
+    }
+    return testWord;
+}   
+    
+function truncation(word, wordSize, nodeWidth){          
+    var index = word.length, 
+        testWord;
+    while (wordSize>nodeWidth && index>MIN_WORD_LENGTH){
+        index--;        
+        testWord = word.substring(0,index);
+        wordSize = getWordSize(testWord);        
+    }    
+    return testWord;
+}    
+    
+function truncationKeepEnd(word, wordSize, nodeWidth){          
+    var index = word.length-1, 
+        endWord, testWord;
+    endWord = word.charAt(index);    
+    while (wordSize>nodeWidth-1.5 && index>MIN_WORD_LENGTH){
+        index--;        
+        testWord = word.substring(0,index)+"·"+endWord;
+        console.log(word+" "+testWord);
+        wordSize = getWordSize(testWord);        
+    }    
+    return testWord;
+}        
+
+function wordAbbreviation(technique, word, nodeWidth){
+    var wordpx = getWordSize(word);
+    if(wordpx > nodeWidth+1.5) {       
+        switch(+technique) {
+        case 0:                
+            return dropVowels(word, wordpx, nodeWidth);
+            break;
+        case 1:                
+            return truncation(word, wordpx, nodeWidth);
+            break;
+        case 2:                
+            return truncationKeepEnd(word, wordpx, nodeWidth);
+            break;
+        }       
+    } else {
+        return word;
+    }
+}
+    
+function getWordSize(word) {
+    var span = document.getElementById("testArea");
+    span.innerHTML = word;    
+    return(span.offsetWidth)
+}
+    
+
+</script>
+
+<span id="testArea"></span>
