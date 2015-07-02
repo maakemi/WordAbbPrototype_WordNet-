@@ -17,7 +17,7 @@ form {
 
 .node {
   border: solid 1px white;
-  font: 10px sans-serif;
+  font: 11px sans-serif;
   line-height: 12px;
   overflow: hidden;
   position: absolute;
@@ -25,7 +25,7 @@ form {
 }
 
 #testArea {
-    font: 10px sans-serif;
+    font: 11px sans-serif;
     background-color: red;
     visibility: hidden;
 }
@@ -58,7 +58,7 @@ var color = d3.scale.category20c();
 var treemap = d3.layout.treemap()
     .size([width, height])
     .sticky(true)
-    .value(function(d) { return d.size; });
+    .value(function(d) { return d.value; });
 
 var div = d3.select("body").append("div")
     .style("position", "relative")
@@ -67,40 +67,39 @@ var div = d3.select("body").append("div")
     .style("left", margin.left + "px")
     .style("top", margin.top + "px");
 
-d3.json("flare.json", function(error, root) {
+d3.json("test.json", function(error, root) {
+    
+  var nodes = treemap.nodes(root);
+  nodes.forEach(function(d){d.score = d.value;});
   var node = div.datum(root).selectAll(".node")
       .data(treemap.nodes)
-    .enter().append("div")
+      .enter().append("div")
       .attr("class", "node")
       .call(position)
-      .style("background", function(d) { return d.children ? color(d.name) : null; })
-      .text(function(d) { return d.children ? null :wordAbbreviation($('select').val(), d.name, Math.max(0, d.dx - 1)); });
+      .style("background", function(d) { return d.children ? color(d.key) : null; })
+      .text(function(d) { return d.children ? null :wordAbbreviation($('select').val(), d.key, Math.max(0, d.dx - 1)); });
 
-  d3.selectAll("input").on("change", function change() {
-    var value = this.value === "count"
+  d3.selectAll("input").on("change", function() {
+    var val = this.value === "count"
         ? function() { return 1; }
-        : function(d) { return d.size; };
+        : function(d) { return d.score; };
 
-    node
-        .data(treemap.value(value).nodes)
+    d3.selectAll(".node")
+        .data(treemap.value(val).nodes())
         .transition()
         .duration(1000)
         .call(position)
-        .text(function(d) { return d.children ? null :wordAbbreviation($('select').val(), d.name, Math.max(0, d.dx - 1)); });
+        .text(function(d) { return d.children ? null :wordAbbreviation($('select').val(), d.key, Math.max(0, d.dx - 1)); });
   });
     
-    d3.selectAll("select").on("change", function change() {  
-    console.log(this.value);    
-    var mode = $('input[name=mode]:checked').val() === "count"
-        ? function() { return 1; }
-        : function(d) { return d.size; };
+    d3.selectAll("select").on("change", function change() {         
 
     node
-        .data(treemap.value(mode).nodes)
+        .data(treemap.nodes)
         .transition()
         .duration(1000)
         .call(position)
-        .text(function(d) { return d.children ? null : wordAbbreviation($('select').val(), d.name, Math.max(0, d.dx - 1)); });
+        .text(function(d) { return d.children ? null : wordAbbreviation($('select').val(), d.key, Math.max(0, d.dx - 1)); });
   });
 });
 
@@ -139,10 +138,9 @@ function truncationKeepEnd(word, wordSize, nodeWidth){
     var index = word.length-1, 
         endWord, testWord;
     endWord = word.charAt(index);    
-    while (wordSize>nodeWidth-1.5 && index>MIN_WORD_LENGTH){
+    while (wordSize>nodeWidth-2 && index>MIN_WORD_LENGTH){
         index--;        
-        testWord = word.substring(0,index)+"·"+endWord;
-        console.log(word+" "+testWord);
+        testWord = word.substring(0,index)+"·"+endWord;        
         wordSize = getWordSize(testWord);        
     }    
     return testWord;
@@ -150,7 +148,7 @@ function truncationKeepEnd(word, wordSize, nodeWidth){
 
 function wordAbbreviation(technique, word, nodeWidth){
     var wordpx = getWordSize(word);
-    if(wordpx > nodeWidth+1.5) {       
+    if(wordpx > nodeWidth+2) {       
         switch(+technique) {
         case 0:                
             return dropVowels(word, wordpx, nodeWidth);
