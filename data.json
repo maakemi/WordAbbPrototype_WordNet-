@@ -1,0 +1,600 @@
+{
+  "id": 1,
+  "parentId": 1,
+  "key": "Word Database",
+    "value": 4,
+  "children": [
+    {
+      "id": 2,
+      "parentId": 1,
+      "value": 20,
+      "key": "astronaut",
+      "children": [
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "extraterrestrial",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "constellations",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "colonization",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "observatory",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "exploration",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "instrumentation",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "meteorological",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "explorations",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "compartment",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "atmospheric",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "microorganisms",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "interstellar",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "measurements",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "adventures",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "telescopes",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "disintegration",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "stratosphere",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "experiments",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "expeditions",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "satellites",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "parentId": 1,
+        "value": 20,
+      "key": "automobile",
+      "children": [
+          {
+          "id": 4,
+          "parentId": 2,
+          "value": 1,
+          "key": "transportation",
+          "children": []
+        },
+          {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "accelerating",
+          "children": []
+        },
+          {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "automotive",
+          "children": []
+        },
+          {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "horsepower",
+          "children": []
+        },
+          {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "collisions",
+          "children": []
+        },
+          {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "industrialized",
+          "children": []
+        },
+          {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "mechanically",
+          "children": []
+        },
+          {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "electrical",
+          "children": []
+        },
+          {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "windshield",
+          "children": []
+        },
+          {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "combustion",
+          "children": []
+        },
+          {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "manufacturing",
+          "children": []
+        },
+          {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "acceleration",
+          "children": []
+        },
+          {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "pedestrians",
+          "children": []
+        },
+          {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "mechanical",
+          "children": []
+        },
+          {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "investment",
+          "children": []
+        },
+          {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "transmissions",
+          "children": []
+        },
+          {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "dealerships",
+          "children": []
+        },
+          {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "manufacture",
+          "children": []
+        },
+          {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "locomotive",
+          "children": []
+        },
+          {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "industrial",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "parentId": 1,
+        "value": 20,
+      "key": "classroom",
+      "children": [
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "schoolchildren",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "instructional",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "socialization",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "laboratory",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "graduation",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "extracurricular",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "assignments",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "academically",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "enrollments",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "principals",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "undergraduates",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "comprehension",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "kindergarten",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "vocational",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "enrollment",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "educationally",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "undergraduate",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "comprehensive",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "professors",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "university",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "parentId": 1,
+        "value": 20,
+      "key": "politically",
+      "children": [
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "interdependent",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "parliamentary",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "circunstance",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "dictatorship",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "trustworthy",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "individualistic",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "congresswoman",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "inflationary",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "undertaking",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "opposition",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "democratization",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "decentralized",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "geopolitical",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "communicator",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "theological",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "internationally",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "jurisprudence",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "constitution",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "manipulated",
+          "children": []
+        },
+        {
+          "id": 4,
+          "parentId": 2,
+            "value": 1,
+          "key": "multifaced",
+          "children": []
+        }
+      ]
+    }
+  ]
+}

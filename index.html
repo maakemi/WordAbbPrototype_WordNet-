@@ -34,6 +34,7 @@ form {
 
 <form>
   <label><select >
+              <option value=3>On Demand</option>
               <option value=0>Drop Vowels</option>
               <option value=1>Truncation</option>              
               <option value=2>Truncation Keep End</option>
@@ -44,64 +45,97 @@ form {
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="/library/jquery-1.2.6.min.js"></script>
+<script src="wordVis.js"></script>
+<script src="abbrOnDemand.js"></script>
 <script>
+    var MIN_WORD_LENGTH = 1;
+    var letterFreq = "etaoinsrhldcumfpgwybvkxjqz";
+    var labels = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+    var matLabel = getLabels(labels);
+    var alpha = {};
+    var correlationMatrix = [];
+    var digraph = {}, monograph = {}, loadedData, dropProbability; 
     
+$(document).ready(function(){
     
-var MIN_WORD_LENGTH = 1;
+       
 
-var margin = {top: 60, right: 10, bottom: 10, left: 10},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    d3.csv("abbStudy_data.csv", function(data) {
+        d3.csv("rankbigraph.csv", function(rank) {    
+           digraph = processRank(rank);       
+            d3.csv("monograph.csv", function(mono) {   
+                monograph = processMonograph(mono);            
+                d3.csv("accuracy.csv", function(acc) {
+                    d3.csv("dropProbability.csv", function(dropProb) {
+                        //console.log(rank);
+                        //console.log(acc);
+                        dropProbability = dropProb;
+                        loadedData = process2(acc);
+                        console.log(loadedData);
+                        alpha = statsMatrixBigraph(loadedData,matLabel);
+                        correlationMatrix = getDrop1(alpha, digraph);
+                        
 
-var color = d3.scale.category20c();
+                        var margin = {top: 60, right: 10, bottom: 10, left: 10},
+                            width = 960 - margin.left - margin.right,
+                            height = 500 - margin.top - margin.bottom;
 
-var treemap = d3.layout.treemap()
-    .size([width, height])
-    .sticky(true)
-    .value(function(d) { return d.value; });
+                        var color = d3.scale.category20c();
 
-var div = d3.select("body").append("div")
-    .style("position", "relative")
-    .style("width", (width + margin.left + margin.right) + "px")
-    .style("height", (height + margin.top + margin.bottom) + "px")
-    .style("left", margin.left + "px")
-    .style("top", margin.top + "px");
+                        var treemap = d3.layout.treemap()
+                            .size([width, height])
+                            .sticky(true)
+                            .value(function(d) { return d.value; });
 
-d3.json("test.json", function(error, root) {
-    
-  var nodes = treemap.nodes(root);
-  nodes.forEach(function(d){d.score = d.value;});
-  var node = div.datum(root).selectAll(".node")
-      .data(treemap.nodes)
-      .enter().append("div")
-      .attr("class", "node")
-      .call(position)
-      .style("background", function(d) { return d.children ? color(d.key) : null; })
-      .text(function(d) { return d.children ? null :wordAbbreviation($('select').val(), d.key, Math.max(0, d.dx - 1)); });
+                        var div = d3.select("body").append("div")
+                            .style("position", "relative")
+                            .style("width", (width + margin.left + margin.right) + "px")
+                            .style("height", (height + margin.top + margin.bottom) + "px")
+                            .style("left", margin.left + "px")
+                            .style("top", margin.top + "px");
 
-  d3.selectAll("input").on("change", function() {
-    var val = this.value === "count"
-        ? function() { return 1; }
-        : function(d) { return d.score; };
+                        d3.json("data.json", function(error, root) {
 
-    d3.selectAll(".node")
-        .data(treemap.value(val).nodes())
-        .transition()
-        .duration(1000)
-        .call(position)
-        .text(function(d) { return d.children ? null :wordAbbreviation($('select').val(), d.key, Math.max(0, d.dx - 1)); });
-  });
-    
-    d3.selectAll("select").on("change", function change() {         
+                          var nodes = treemap.nodes(root);
+                          nodes.forEach(function(d){d.score = d.key.length;});
+                          var node = div.datum(root).selectAll(".node")
+                              .data(treemap.nodes)
+                              .enter().append("div")
+                              .attr("class", "node")
+                              .call(position)
+                              .style("background", function(d) { return d.children ? color(d.key) : null; })
+                              .text(function(d) { return d.children ? null :wordAbbreviation($('select').val(), d.key, Math.max(0, d.dx - 1)); });
 
-    node
-        .data(treemap.nodes)
-        .transition()
-        .duration(1000)
-        .call(position)
-        .text(function(d) { return d.children ? null : wordAbbreviation($('select').val(), d.key, Math.max(0, d.dx - 1)); });
-  });
-});
+                          d3.selectAll("input").on("change", function() {
+                            var val = this.value === "count"
+                                ? function() { return 1; }
+                                : function(d) { return d.score; };
+
+                            d3.selectAll(".node")
+                                .data(treemap.value(val).nodes())
+                                .transition()
+                                .duration(1000)
+                                .call(position)
+                                .text(function(d) { return d.children ? null :wordAbbreviation($('select').val(), d.key, Math.max(0, d.dx - 1)); });
+                          });
+
+                            d3.selectAll("select").on("change", function change() {         
+
+                            node
+                                .data(treemap.nodes)
+                                .transition()
+                                .duration(1000)
+                                .call(position)
+                                .text(function(d) { return d.children ? null : wordAbbreviation($('select').val(), d.key, Math.max(0, d.dx - 1)); });
+                          });
+                        });                    
+                    });
+                });
+            });
+        });
+    });
+});    
+
 
 function position() {    
   this.style("left", function(d) { return d.x + "px"; })
@@ -148,7 +182,7 @@ function truncationKeepEnd(word, wordSize, nodeWidth){
 
 function wordAbbreviation(technique, word, nodeWidth){
     var wordpx = getWordSize(word);
-    if(wordpx > nodeWidth+2) {       
+    if(wordpx > nodeWidth+5) {       
         switch(+technique) {
         case 0:                
             return dropVowels(word, wordpx, nodeWidth);
@@ -159,11 +193,29 @@ function wordAbbreviation(technique, word, nodeWidth){
         case 2:                
             return truncationKeepEnd(word, wordpx, nodeWidth);
             break;
+        case 3:                
+            return onDemand(word, wordpx, nodeWidth);
+            break;
         }       
     } else {
         return word;
     }
 }
+    
+function onDemand(word, wordSize, nodeWidth){
+  
+    var index = word.length, 
+        testWord = word;
+    while (wordSize>(nodeWidth-6) && index>MIN_WORD_LENGTH){
+        index--;        
+        testWord = (""+abbreviateCamelCase(word, testWord.length-1, alpha, digraph, monograph, correlationMatrix, dropProbability, labels));
+        wordSize = getWordSize(testWord);        
+    }    
+    return testWord;
+      
+    
+    
+}     
     
 function getWordSize(word) {
     var span = document.getElementById("testArea");
